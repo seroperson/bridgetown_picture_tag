@@ -1,4 +1,4 @@
-require_relative 'output_format_test_helper'
+require_relative "output_format_test_helper"
 
 # Most of this functionality is capured in a normal Picture output; we only
 # focus on the places where they differ.
@@ -25,7 +25,7 @@ class TestDataPicture < Minitest::Test
   end
 
   def test_multiple_formats
-    PictureTag.formats.prepend 'webp'
+    PictureTag.formats.prepend "webp"
     PictureTag.source_images << media_source_stub
 
     correct = <<~HEREDOC

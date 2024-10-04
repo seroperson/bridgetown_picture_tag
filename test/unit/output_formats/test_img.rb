@@ -1,4 +1,4 @@
-require_relative 'output_format_test_helper'
+require_relative "output_format_test_helper"
 
 class TestImg < Minitest::Test
   include OutputFormatTestHelper
@@ -56,7 +56,7 @@ class TestImg < Minitest::Test
   end
 
   def test_alt
-    PictureTag.html_attributes.merge!({ 'alt' => 'alt text' })
+    PictureTag.html_attributes["alt"] = "alt text"
 
     correct = <<~HEREDOC
       <img src="good_url" alt="alt text" srcset="ss">
@@ -66,7 +66,7 @@ class TestImg < Minitest::Test
   end
 
   def test_parent
-    PictureTag.html_attributes.merge!({ 'parent' => 'class="parent"' })
+    PictureTag.html_attributes["parent"] = 'class="parent"'
 
     correct = <<~HEREDOC
       <img src="good_url" srcset="ss" class="parent">
@@ -76,7 +76,7 @@ class TestImg < Minitest::Test
   end
 
   def test_img_attrs
-    PictureTag.html_attributes.merge!({ 'img' => 'class="img"' })
+    PictureTag.html_attributes["img"] = 'class="img"'
 
     correct = <<~HEREDOC
       <img class="img" src="good_url" srcset="ss">
@@ -86,8 +86,8 @@ class TestImg < Minitest::Test
   end
 
   def test_both_attrs
-    PictureTag.html_attributes.merge!({ 'img' => 'class="img"',
-                                        'parent' => 'class="parent"' })
+    PictureTag.html_attributes.merge!({"img" => 'class="img"',
+                                       "parent" => 'class="parent"'})
 
     correct = <<~HEREDOC
       <img class="img parent" src="good_url" srcset="ss">
@@ -97,7 +97,7 @@ class TestImg < Minitest::Test
   end
 
   def test_anchor_tag
-    PictureTag.html_attributes['link'] = 'some link'
+    PictureTag.html_attributes["link"] = "some link"
 
     correct = <<~HEREDOC
       <a href="some link">
@@ -109,8 +109,8 @@ class TestImg < Minitest::Test
   end
 
   def test_anchor_with_attrs
-    PictureTag.html_attributes.merge!({ 'link' => 'some link',
-                                        'a' => 'class="anchor"' })
+    PictureTag.html_attributes.merge!({"link" => "some link",
+                                       "a" => 'class="anchor"'})
 
     correct = <<~HEREDOC
       <a class="anchor" href="some link">
@@ -123,7 +123,7 @@ class TestImg < Minitest::Test
 
   def test_nomarkdown_wrapper
     PictureTag.stubs(nomarkdown?: true)
-    PictureTag.html_attributes['link'] = 'some link'
+    PictureTag.html_attributes["link"] = "some link"
 
     correct = <<~HEREDOC
       {::nomarkdown}<a href="some link"><img src="good_url" srcset="ss"></a>{:/nomarkdown}

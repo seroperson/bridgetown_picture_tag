@@ -7,7 +7,7 @@ module Stubs
 
     GeneratedImageStub =
       Struct.new(:name, :width, :uri, :format, :exists?, :generate,
-                 keyword_init: true)
+        keyword_init: true)
 
     # Rubocop doesn't want us to override to_s in a struct. Since it's for a
     # test stub, it's fine.
@@ -18,8 +18,8 @@ module Stubs
 
     SourceImageStub =
       Struct.new(:base_name, :name, :missing, :digest, :ext, :width, :shortname,
-                 :media_preset, :digest_guess, :crop?, :crop, :keep,
-                 :cropped_width, :dimensions, keyword_init: true)
+        :media_preset, :digest_guess, :crop?, :crop, :keep,
+        :cropped_width, :dimensions, keyword_init: true)
 
     # Jekyll classes:
 
@@ -32,7 +32,7 @@ module Stubs
     TokenStub =
       Struct.new(:line_number, :locale)
 
-    # Objective Elements classes:
+    PageStub = Struct.new(:path, :extname) # Objective Elements classes:
 
     SingleTagStub =
       Struct.new(:name, :attributes)

@@ -1,4 +1,4 @@
-require_relative 'output_format_test_helper'
+require_relative "output_format_test_helper"
 
 class TestNakedSrcset < Minitest::Test
   include OutputFormatTestHelper
@@ -12,6 +12,6 @@ class TestNakedSrcset < Minitest::Test
   end
 
   def test_basic
-    assert_equal 'ss', tested.to_s
+    assert_equal "ss", tested.to_s
   end
 end

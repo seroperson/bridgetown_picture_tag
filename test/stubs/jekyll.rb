@@ -8,19 +8,19 @@ module Stubs
   end
 
   def build_context
-    environments = [{ 'jekyll' => { 'environment' => jekyll_env } }]
-    registers = { site: site, page: page }
+    environments = [{"jekyll" => {"environment" => jekyll_env}}]
+    registers = {site: site, page: page}
 
     ContextStub.new(environments, registers)
   end
 
   def site
     @site ||= SiteStub.new(config_dot_yml, jekyll_data, site_source,
-                           site_dest, cache_dir)
+      site_dest, cache_dir)
   end
 
   def jekyll_env
-    @jekyll_env ||= 'development'
+    @jekyll_env ||= "development"
   end
 
   def site_dest
@@ -29,10 +29,10 @@ module Stubs
 
   # _config.yml
   def config_dot_yml
-    @config_dot_yml ||= { 'picture' => pconfig,
-                          'keep_files' => [],
-                          'destination' => site_dest,
-                          'url' => 'example.com' }
+    @config_dot_yml ||= {"picture" => pconfig,
+                         "keep_files" => [],
+                         "destination" => site_dest,
+                         "url" => "example.com"}
   end
 
   # picture: key in _config.yml
@@ -42,27 +42,27 @@ module Stubs
 
   # Loaded from _data/*.yml
   def jekyll_data
-    @jekyll_data ||= { 'picture' => picture_dot_yml }
+    @jekyll_data ||= {"picture" => picture_dot_yml}
   end
 
   # _data/picture.yml
   def picture_dot_yml
     @picture_dot_yml ||= {
-      'presets' => presets,
-      'media_queries' => media_queries
+      "presets" => presets,
+      "media_queries" => media_queries
     }
   end
 
   def page
-    @page ||= { 'ext' => 'html' }
+    @page ||= PageStub.new("/path/file.html", "html")
   end
 
   def site_source
-    @site_source ||= File.join TestHelper::TEST_DIR, 'image_files'
+    @site_source ||= File.join TestHelper::TEST_DIR, "image_files"
   end
 
   def cache_dir
-    @cache_dir ||= temp_dir('cache')
+    @cache_dir ||= temp_dir("cache")
   end
 
   def stub_liquid

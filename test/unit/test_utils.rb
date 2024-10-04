@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class TestUtils < Minitest::Test
   include PictureTag
@@ -10,61 +10,61 @@ class TestUtils < Minitest::Test
   end
 
   def test_keep_files
-    PictureTag.pconfig['output'] = 'test_output/'
-    PictureTag.site.config['keep_files'] = []
+    PictureTag.pconfig["output"] = "test_output/"
+    PictureTag.site.config["keep_files"] = []
 
     Utils.keep_files
 
     # Should strip a trailing slash if present.
-    assert_includes PictureTag.site.config['keep_files'], 'test_output'
+    assert_includes PictureTag.site.config["keep_files"], "test_output"
   end
 
   def test_warning_enabled
-    PictureTag.pconfig['suppress_warnings'] = false
+    PictureTag.pconfig["suppress_warnings"] = false
 
     assert_output nil, /test message/ do
-      Utils.warning('test message')
+      Utils.warning("test message")
     end
   end
 
   def test_warning_disabled
-    PictureTag.pconfig['suppress_warnings'] = true
+    PictureTag.pconfig["suppress_warnings"] = true
 
     assert_silent do
-      Utils.warning('test message')
+      Utils.warning("test message")
     end
   end
 
   def test_liquid_lookup
-    PictureTag.stubs(context: 'context')
-    Liquid::Template.stubs(:parse).with('params')
-                    .returns(template_stub = Object.new)
+    PictureTag.stubs(context: "context")
+    Liquid::Template.stubs(:parse).with("params")
+      .returns(template_stub = Object.new)
 
-    template_stub.expects(:render).with('context')
+    template_stub.expects(:render).with("context")
 
-    Utils.liquid_lookup('params')
+    Utils.liquid_lookup("params")
   end
 
   def test_count_srcsets
-    PictureTag.stubs(formats: [1, 2, 3, 4], source_images: { a: 'a', b: 'b' })
+    PictureTag.stubs(formats: [1, 2, 3, 4], source_images: {a: "a", b: "b"})
 
     assert_equal(8, Utils.count_srcsets)
   end
 
   def test_markdown_page
-    PictureTag.page['name'] = 'test.md'
+    PictureTag.page["name"] = "test.md"
 
     assert Utils.markdown_page?
   end
 
   def test_not_markdown_page
-    PictureTag.page['name'] = 'test.html'
+    PictureTag.page["name"] = "test.html"
 
     refute Utils.markdown_page?
   end
 
   def test_titleize
-    assert_equal 'SnakeCase', Utils.titleize('snake_case')
+    assert_equal "SnakeCase", Utils.titleize("snake_case")
   end
 
   # Had to bust out my old TI-86 to work this one out!
@@ -78,6 +78,6 @@ class TestUtils < Minitest::Test
   end
 
   def test_snakeize
-    assert_equal 'snake_case', Utils.snakeize('SnakeCase')
+    assert_equal "snake_case", Utils.snakeize("SnakeCase")
   end
 end

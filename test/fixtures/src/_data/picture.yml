@@ -1,0 +1,11 @@
+media_queries:
+  mobile: "max-width: 600px"
+
+presets:
+  default:
+    formats: [webp]
+    widths: [400, 800]
+    fallback_format: webp
+    sizes:
+      mobile: 80vw
+    link_source: true

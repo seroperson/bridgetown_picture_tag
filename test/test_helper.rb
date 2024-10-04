@@ -1,16 +1,21 @@
-require 'simplecov'
-require 'minitest/rg'
+require "simplecov"
+require "minitest/rg"
 
 SimpleCov.start do
-  add_filter '/test/'
+  add_filter "/test/"
 end
 
-require 'minitest/autorun'
-require 'mocha/minitest'
-require 'pry'
-require 'nokogiri'
-require 'jekyll_picture_tag'
-require_relative 'stubs'
+require "bridgetown"
+
+Bridgetown.begin!
+Bridgetown.logger.log_level = :error
+
+require "minitest/autorun"
+require "mocha/minitest"
+require "pry"
+require "nokogiri"
+require "bridgetown_picture_tag"
+require_relative "stubs"
 
 # This module gives us a basic setup to run our tests.
 module TestHelper
@@ -19,7 +24,7 @@ module TestHelper
 
   def nomarkdown_wrapped?(string)
     # rubocop:disable Style/RegexpLiteral
-    start  = /^\{::nomarkdown\}/
+    start = /^\{::nomarkdown\}/
     finish = /\{:\/nomarkdown\}$/
     # rubocop:enable Style/RegexpLiteral
 
@@ -40,21 +45,21 @@ module TestHelper
   end
 
   def temp_dir(*descendents)
-    File.join '/tmp/jpt', *descendents
+    File.join "/tmp/jpt", *descendents
   end
 
   # We're having trouble with tests failing because whatever system is running
   # them doesn't support some image format. This returns an array of image
   # formats which we care about, and which are locally supported.
   def supported_formats
-    output = `vips --list` + `convert --version`
+    output = `vips --list` + `magick --version`
 
-    formats = %w[jpg png webp gif jp2 avif].select do |format|
+    formats = %w[jpg png webp gif jp2 avif].select { |format|
       output.include? format
-    end
+    }
 
     # Sanity check
-    raise 'Not enough locally supported formats' unless formats.length >= 3
+    raise "Not enough locally supported formats" unless formats.length >= 3
 
     formats
   end

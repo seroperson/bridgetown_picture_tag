@@ -1,4 +1,4 @@
-require_relative 'output_format_test_helper'
+require_relative "output_format_test_helper"
 
 class TestPicture < Minitest::Test
   include OutputFormatTestHelper
@@ -29,7 +29,7 @@ class TestPicture < Minitest::Test
   end
 
   def test_multiple_formats
-    PictureTag.formats.prepend 'webp'
+    PictureTag.formats.prepend "webp"
 
     correct = <<~HEREDOC
       <picture>
@@ -58,7 +58,7 @@ class TestPicture < Minitest::Test
 
   def test_picture_multiple
     PictureTag.source_images << media_source_stub
-    PictureTag.formats.prepend 'webp'
+    PictureTag.formats.prepend "webp"
 
     correct = <<~HEREDOC
       <picture>
@@ -88,7 +88,7 @@ class TestPicture < Minitest::Test
   end
 
   def test_picture_attrs
-    PictureTag.html_attributes.merge!('picture' => 'class="picture"')
+    PictureTag.html_attributes["picture"] = 'class="picture"'
 
     correct = <<~HEREDOC
       <picture class="picture">
@@ -101,7 +101,7 @@ class TestPicture < Minitest::Test
   end
 
   def test_parent_attrs
-    PictureTag.html_attributes.merge!('parent' => 'class="parent"')
+    PictureTag.html_attributes["parent"] = 'class="parent"'
 
     correct = <<~HEREDOC
       <picture class="parent">
@@ -114,7 +114,7 @@ class TestPicture < Minitest::Test
   end
 
   def test_alt_text
-    PictureTag.html_attributes.merge!('alt' => 'alt text')
+    PictureTag.html_attributes["alt"] = "alt text"
 
     correct = <<~HEREDOC
       <picture>
@@ -128,12 +128,12 @@ class TestPicture < Minitest::Test
 
   def test_multiple_attrs
     PictureTag.html_attributes.merge!({
-                                        'picture' => 'class="picture"',
-                                        'parent' => 'class="parent"',
-                                        'source' => 'class="source"',
-                                        'img' => 'class="img"',
-                                        'alt' => 'alt text'
-                                      })
+      "picture" => 'class="picture"',
+      "parent" => 'class="parent"',
+      "source" => 'class="source"',
+      "img" => 'class="img"',
+      "alt" => "alt text"
+    })
 
     correct = <<~HEREDOC
       <picture class="picture parent">
@@ -159,7 +159,7 @@ class TestPicture < Minitest::Test
   end
 
   def test_anchor
-    PictureTag.html_attributes.merge!({ 'link' => 'some url' })
+    PictureTag.html_attributes["link"] = "some url"
 
     correct = <<~HEREDOC
       <a href="some url">
@@ -174,7 +174,7 @@ class TestPicture < Minitest::Test
   end
 
   def test_nomarkdown
-    PictureTag.html_attributes.merge!({ 'link' => 'some url' })
+    PictureTag.html_attributes["link"] = "some url"
     PictureTag.stubs(nomarkdown?: true)
 
     correct = <<~HEREDOC

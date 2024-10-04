@@ -16,3 +16,6 @@ jekyll-picture-tag.iml
 /docs/.sass-cache/
 /bin/
 /docs/bin/
+/vendor
+/test/dest/
+/test/fixtures/.bridgetown-cache/

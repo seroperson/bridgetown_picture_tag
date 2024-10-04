@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 module SrcsetTestHelper
   include TestHelper
@@ -12,8 +12,8 @@ module SrcsetTestHelper
 
   def source_image
     @source_image ||= SourceImageStub.new(
-      width: 1000, shortname: 'some name', digest: 'aaaaa', ext: 'jpg',
-      media_preset: 'mobile'
+      width: 1000, shortname: "some name", digest: "aaaaa", ext: "jpg",
+      media_preset: "mobile"
     )
   end
 
@@ -22,14 +22,14 @@ module SrcsetTestHelper
       name: "img-#{width}-aaaaa.jpg",
       uri: "/img-#{width}-aaaaa.jpg",
       width: width,
-      format: 'jpg',
+      format: "jpg",
       exists?: exists
     )
   end
 
-  def stub_generated(width, returns, format = 'original')
+  def stub_generated(width, returns, format = "original")
     GeneratedImage.stubs(:new)
-                  .with(source_file: source_image, width: width, format: format)
-                  .returns(returns)
+      .with(source_file: source_image, width: width, format: format)
+      .returns(returns)
   end
 end

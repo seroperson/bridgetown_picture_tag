@@ -1,31 +1,31 @@
-require_relative 'srcsets_test_helper'
+require_relative "srcsets_test_helper"
 
 class TestSrcsetWidth < Minitest::Test
   include SrcsetTestHelper
 
   def tested
-    Srcsets::Width.new(source_image, 'original')
+    Srcsets::Width.new(source_image, "original")
   end
 
   def config
-    { widths: [100, 200, 300], crop: nil, keep: 'center' }
+    {widths: [100, 200, 300], crop: nil, keep: "center"}
   end
 
   def stub_picturetag_sizes
     PictureTag.stubs(preset: {
-                       'sizes' => { 'mobile' => 'mobile size' },
-                       'size' => 'regular size'
+                       "sizes" => {"mobile" => "mobile size"},
+                       "size" => "regular size"
                      },
-                     media_presets: {
-                       'mobile' => 'mobile query'
-                     })
+      media_presets: {
+        "mobile" => "mobile query"
+      })
   end
 
   def test_basic
     correct =
-      '/img-100-aaaaa.jpg 100w, ' \
-      '/img-200-aaaaa.jpg 200w, ' \
-      '/img-300-aaaaa.jpg 300w'
+      "/img-100-aaaaa.jpg 100w, " \
+      "/img-200-aaaaa.jpg 200w, " \
+      "/img-300-aaaaa.jpg 300w"
 
     assert_equal correct, tested.to_s
   end
@@ -42,31 +42,31 @@ class TestSrcsetWidth < Minitest::Test
   def test_sizes
     stub_picturetag_sizes
 
-    correct = '(mobile query) mobile size, regular size'
+    correct = "(mobile query) mobile size, regular size"
 
     assert_equal correct, tested.sizes
   end
 
   def test_mime_type
-    assert_equal 'image/jpeg', tested.mime_type
+    assert_equal "image/jpeg", tested.mime_type
   end
 
   def test_media
-    assert_equal 'mobile', tested.media
+    assert_equal "mobile", tested.media
   end
 
   def test_media_attribute
     stub_picturetag_sizes
 
-    assert_equal '(mobile query)', tested.media_attribute
+    assert_equal "(mobile query)", tested.media_attribute
   end
 
   def test_small_source
     source_image.width = 150
 
     correct =
-      '/img-100-aaaaa.jpg 100w, ' \
-      '/img-150-aaaaa.jpg 150w'
+      "/img-100-aaaaa.jpg 100w, " \
+      "/img-150-aaaaa.jpg 150w"
 
     Utils.expects(:warning)
     assert_equal correct, tested.to_s

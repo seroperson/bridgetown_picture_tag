@@ -1,4 +1,4 @@
-require_relative 'output_format_test_helper'
+require_relative "output_format_test_helper"
 
 class TestDataImg < Minitest::Test
   include OutputFormatTestHelper
@@ -36,7 +36,7 @@ class TestDataImg < Minitest::Test
   end
 
   def test_noscript
-    PictureTag.preset['noscript'] = true
+    PictureTag.preset["noscript"] = true
     PictureTag.stubs(nomarkdown: false)
 
     correct = <<~HEREDOC

@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 # Tests of generated images, when the source image is missing. The fact that
 # these tests need to exist say that GeneratedImage knows too much about
@@ -15,24 +15,24 @@ class GeneratedImageMissingTest < Minitest::Test
   end
 
   def tested
-    GeneratedImage.new(source_file: source_stub, width: 100, format: 'webp')
+    GeneratedImage.new(source_file: source_stub, width: 100, format: "webp")
   end
 
   # Helpers
 
   def config
-    { dest_dir: '/home/loser/generated', fast_build: false, quality: 75 }
+    {dest_dir: "/home/loser/generated", fast_build: false, quality: 75}
   end
 
   def destfile
-    '/home/loser/generated/img-100-xxxxxx.webp'
+    "/home/loser/generated/img-100-xxxxxx.webp"
   end
 
   def source_stub
-    @source_stub ||= SourceImageStub.new(base_name: 'img',
-                                         name: '/home/loser/img.jpg',
-                                         missing: true, digest: 'x' * 6,
-                                         ext: 'jpg')
+    @source_stub ||= SourceImageStub.new(base_name: "img",
+      name: "/home/loser/img.jpg",
+      missing: true, digest: "x" * 6,
+      ext: "jpg")
   end
 
   # Tests
@@ -44,6 +44,6 @@ class GeneratedImageMissingTest < Minitest::Test
   end
 
   def test_name
-    assert_equal 'img-100-8fa2c9181.webp', tested.name
+    assert_equal "img-100-8fa2c9181.webp", tested.name
   end
 end

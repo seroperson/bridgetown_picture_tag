@@ -8,13 +8,13 @@ class TestInstructions < Minitest::Test
 
   def build_tested
     subject = PictureTag::Instructions::Instruction.new
-    subject.stubs(source: 'setting')
+    subject.stubs(source: "setting")
 
     subject
   end
 
   def test_value
-    assert_equal 'setting', tested.value
+    assert_equal "setting", tested.value
   end
 
   def test_validation_fail
@@ -24,8 +24,8 @@ class TestInstructions < Minitest::Test
   end
 
   def test_coercion
-    tested.stubs(coerce: 'coerced')
-    assert_equal 'coerced', tested.value
+    tested.stubs(coerce: "coerced")
+    assert_equal "coerced", tested.value
   end
 
   def test_env_arg

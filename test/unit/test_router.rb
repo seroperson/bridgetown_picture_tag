@@ -27,7 +27,7 @@ class RouterTest < Minitest::Test
 
   # InstructionStub returns an array of whatever arguments are passed in.
   def test_round_trip
-    assert_equal 'foo', *tested('foo')
+    assert_equal "foo", *tested("foo")
   end
 
   def test_respond_existing

@@ -12,9 +12,9 @@ class TestImageFile < Minitest::Test
 
   def preset
     {
-      'strip_metadata' => true,
-      'image_options' => {
-        'avif' => { 'compression' => 'av1' }
+      "strip_metadata" => true,
+      "image_options" => {
+        "avif" => {"compression" => "av1"}
       }
     }
   end
@@ -30,11 +30,11 @@ class TestImageFile < Minitest::Test
   end
 
   def dest_name
-    @dest_name ||= 'tested.jpg'
+    @dest_name ||= "tested.jpg"
   end
 
   def format
-    @format ||= 'jpg'
+    @format ||= "jpg"
   end
 
   def filename
@@ -66,8 +66,8 @@ class TestImageFile < Minitest::Test
     Vips::Image.new_from_file(source_filename)
   end
 
-  def source_filename(basename = 'rms', format = 'jpg')
-    File.join(TEST_DIR, 'image_files', "#{basename}.#{format}")
+  def source_filename(basename = "rms", format = "jpg")
+    File.join(TEST_DIR, "image_files", "#{basename}.#{format}")
   end
 
   def gen_stub
@@ -84,7 +84,7 @@ class TestImageFile < Minitest::Test
 
   def restub(new_name)
     @dest_name = new_name
-    @format = new_name.split('.').last
+    @format = new_name.split(".").last
     @gen_stub = build_stub(gen_config)
   end
 
@@ -102,10 +102,10 @@ class TestImageFile < Minitest::Test
     formats = supported_formats
 
     formats.each do |input_format|
-      restub_source('rms', input_format)
+      restub_source("rms", input_format)
 
       formats.each do |output_format|
-        restub('rms.' + output_format)
+        restub("rms." + output_format)
 
         tested
 
@@ -121,7 +121,7 @@ class TestImageFile < Minitest::Test
   end
 
   def test_resize
-    restub 'resize.jpg'
+    restub "resize.jpg"
     tested
 
     width = Vips::Image.new_from_file(filename).width
@@ -130,7 +130,7 @@ class TestImageFile < Minitest::Test
   end
 
   def test_resize_with_alpha
-    restub_source('pestka_transparent', 'png')
+    restub_source("pestka_transparent", "png")
     tested
 
     width = Vips::Image.new_from_file(filename).width
@@ -141,13 +141,13 @@ class TestImageFile < Minitest::Test
   def test_quality
     # We have to use slightly larger images for the quality to make a difference
     # in file size.
-    restub 'hq.jpg'
+    restub "hq.jpg"
     gen_stub.stubs(width: 75)
     tested
 
     hq_size = File.size filename
 
-    restub 'lq.jpg'
+    restub "lq.jpg"
     gen_stub.stubs(quality: 10)
 
     tested
@@ -159,28 +159,28 @@ class TestImageFile < Minitest::Test
   end
 
   def test_strip_metadata
-    restub 'strip.jpg'
-    source_stub.stubs(name: source_filename('pestka'))
+    restub "strip.jpg"
+    source_stub.stubs(name: source_filename("pestka"))
 
     tested
 
     exif_data = Vips::Image.new_from_file(filename)
-                           .get_fields
-                           .select { |key| key =~ /^exif/ }
+      .get_fields
+      .select { |key| key =~ /^exif/ }
 
     assert_empty exif_data
   end
 
   def test_no_strip_metadata
-    source_stub.stubs(name: source_filename('pestka'))
-    restub 'nostrip.jpg'
-    PictureTag.preset['strip_metadata'] = false
+    source_stub.stubs(name: source_filename("pestka"))
+    restub "nostrip.jpg"
+    PictureTag.preset["strip_metadata"] = false
 
     tested
 
     exif_data = Vips::Image.new_from_file(filename)
-                           .get_fields
-                           .select { |key| key =~ /^exif/ }
+      .get_fields
+      .select { |key| key =~ /^exif/ }
 
     refute_empty exif_data
   end

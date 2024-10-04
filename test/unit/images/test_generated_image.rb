@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 # Tests of Generated Images, skipping actual image file generation.
 class GeneratedImageTest < Minitest::Test
@@ -16,23 +16,23 @@ class GeneratedImageTest < Minitest::Test
 
   def tested
     @tested ||= GeneratedImage.new(source_file: source_stub,
-                                   width: 100, format: 'webp')
+      width: 100, format: "webp")
   end
 
   def config
-    { fast_build: false, quality: 75, dest_dir: temp_dir }
+    {fast_build: false, quality: 75, dest_dir: temp_dir}
   end
 
   def destfile
-    temp_dir 'img-100-aaaaaa.webp'
+    temp_dir "img-100-aaaaaa.webp"
   end
 
   def source_stub
-    @source_stub ||= SourceImageStub.new(base_name: 'img',
-                                         name: temp_dir('img.jpg'),
-                                         missing: false, digest: 'a' * 6,
-                                         ext: 'jpg', digest_guess: nil,
-                                         crop?: false)
+    @source_stub ||= SourceImageStub.new(base_name: "img",
+      name: temp_dir("img.jpg"),
+      missing: false, digest: "a" * 6,
+      ext: "jpg", digest_guess: nil,
+      crop?: false)
   end
 
   # Tests
@@ -52,24 +52,24 @@ class GeneratedImageTest < Minitest::Test
   end
 
   def test_name
-    assert_equal 'img-100-e391bf5cd.webp', tested.name
+    assert_equal "img-100-e391bf5cd.webp", tested.name
   end
 
   def test_absolute_filename
-    assert_equal temp_dir('img-100-e391bf5cd.webp'),
-                 tested.absolute_filename
+    assert_equal temp_dir("img-100-e391bf5cd.webp"),
+      tested.absolute_filename
   end
 
   def test_format
-    assert_equal '.webp', File.extname(tested.name)
+    assert_equal ".webp", File.extname(tested.name)
   end
 
   def test_format_original
     format = GeneratedImage
-             .new(source_file: source_stub, width: 100, format: 'original')
-             .format
+      .new(source_file: source_stub, width: 100, format: "original")
+      .format
 
-    assert_equal 'jpg', format
+    assert_equal "jpg", format
   end
 
   def test_uri

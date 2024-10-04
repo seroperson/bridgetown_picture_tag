@@ -1,0 +1,69 @@
+{
+  "nodes": {
+    "bundix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1721093334,
+        "narHash": "sha256-5FghZ0HIETbc0TGcBV8uyixq5z4w/9PF5Puhujz3D1o=",
+        "owner": "inscapist",
+        "repo": "bundix",
+        "rev": "42c08846f7e5d91ef121239fd364feaeb22c0bbc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "inscapist",
+        "ref": "main",
+        "repo": "bundix",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1728139629,
+        "narHash": "sha256-xmaMHG0scTq7EDSBxSAuwGS26GjEr+VAAewIibe1qCk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ab9c88500367762c64148cb392fbb56017cd861f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "bundix": "bundix",
+        "nixpkgs": "nixpkgs",
+        "ruby-nix": "ruby-nix"
+      }
+    },
+    "ruby-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1725677741,
+        "narHash": "sha256-CySXGzqycagfrWdcTwzM3Zo1MMm9uUtePYER9BvrW8s=",
+        "owner": "inscapist",
+        "repo": "ruby-nix",
+        "rev": "1f3756f8a713171bf891b39c0d3b1fe6d83a4a63",
+        "type": "github"
+      },
+      "original": {
+        "owner": "inscapist",
+        "repo": "ruby-nix",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
