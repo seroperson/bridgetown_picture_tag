@@ -1,6 +1,14 @@
 # Cauntion
 
-This gem is a very alpha version of [jekyll_picture_tag](https://github.com/rbuchberger/jekyll_picture_tag) plugin adopted to be used with [Bridgetown](https://github.com/bridgetownrb/bridgetown). It probably doesn't work correctly.
+This gem is a very alpha version of [jekyll_picture_tag](https://github.com/rbuchberger/jekyll_picture_tag)
+plugin adopted to be used with [Bridgetown](https://github.com/bridgetownrb/bridgetown). It may not work
+correctly, as I didn't polish it a lot, but all tests are green and I personally use it, so should be ok.
+
+To use in your project:
+
+```
+gem "bridgetown_picture_tag", git: "https://github.com/seroperson/bridgetown_picture_tag.git"
+```
 
 # Bridgetown Picture Tag
 
